@@ -15,7 +15,7 @@
     "content_scripts": [
       {
         "matches": ["*://lms.fu-berlin.de/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_2_1*"],
-        "js": ["sortcourse.js"]
+        "js": ["sortcourses.js"]
       }
     ]
 
