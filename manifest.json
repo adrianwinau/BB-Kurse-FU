@@ -9,7 +9,7 @@
     "homepage_url": "https://github.com/ITadno/BB-Kurse-FU",
 
     "icons": {
-      "48": "icons/addon-icon.png"
+      "32": "icons/addon-icon.png"
     },
 
     "content_scripts": [
