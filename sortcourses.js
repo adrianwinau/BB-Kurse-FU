@@ -74,15 +74,18 @@ class PriorityQueue {
 
 function printSemster(semester) {
     let year = "20" + semester.substr(0, 2);
+    let nextYear = (parseInt(semester.substr(0, 2))+1).toString();
     if (semester.charAt(2) == 'S') {
         return "Sommersemster " + year;
     } else if (semester.charAt(2) == 'W') {
-        return "Wintersemster " + year;
+        return "Wintersemster " + year + "/" + nextYear;
     }
     return "Sonstige Kurse";
 }
 
+let countStart = 0;
 function waitForElement(elementId, callBack) {
+  if (++countStart > 25){ return; }
     window.setTimeout(function() {
         var element = document.getElementById(elementId);
         if (element) {
@@ -105,14 +108,14 @@ function main() {
     });
 
     for (i = 0; i < courseList.length; i++) {
-        let courseText = courseList[i].innerText;
+        let courseText = courseList[i].getElementsByTagName('a')[0].innerText;
         let id = courseText.substring(0, courseText.indexOf(':'));
-        let kursName = courseText.substring(courseText.indexOf(':') + 2, courseText.indexOf('\n'));
+        let kursName = courseText.substring(courseText.indexOf(':') + 2, courseText.length);
         courseList[i].getElementsByTagName('a')[0].innerText = kursName;
         //courseList[i].innerHTML = courseList[i].innerHTML.replace('<div class="courseInformation">', '<div class="courseInformation"> <span class="courseRole">ID: </span><span>' + id + '</span>');
         let x = [
             courseList[i],
-            courseText.substring(id.length - 3, id.length), // Semster
+            id.substring(id.length - 3, id.length), // Semster
             kursName // Name
         ];
         if (!semsterpattern.test(x[1])) {
