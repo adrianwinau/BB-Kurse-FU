@@ -110,8 +110,11 @@ function main() {
     for (i = 0; i < courseList.length; i++) {
         let courseText = courseList[i].getElementsByTagName('a')[0].innerText;
         let id = courseText.substring(0, courseText.indexOf(':'));
-        let kursName = courseText.substring(courseText.indexOf(':') + 2, courseText.length);
+        let kursName = courseText.substring(courseText.indexOf(':')+1, courseText.length).trim();
         courseList[i].getElementsByTagName('a')[0].innerText = kursName;
+        if( kursName.includes(')') ) {
+            kursName = kursName.substring(kursName.indexOf(')')+1,kursName.length).trim();
+        }
         //courseList[i].innerHTML = courseList[i].innerHTML.replace('<div class="courseInformation">', '<div class="courseInformation"> <span class="courseRole">ID: </span><span>' + id + '</span>');
         let x = [
             courseList[i],
