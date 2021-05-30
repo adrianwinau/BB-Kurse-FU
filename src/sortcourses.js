@@ -75,8 +75,6 @@ class PriorityQueue {
     }
 }
 
-function setFachbereich(value){sortFachbereich = value; console.log("hallo", sortFachbereich, showId);}
-
 var options = new Promise(resolve =>{
     let getting = browser.storage.local.get([
         "showFaculty", "courseId"
