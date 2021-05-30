@@ -1,0 +1,10 @@
+@media (prefers-color-scheme: dark){
+    body{
+        color: #b1b1b3;
+        background: #202023;
+    }
+
+    #settingsform {
+        min-height: 250px;
+    }
+}

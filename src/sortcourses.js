@@ -8,6 +8,9 @@ const parent = i => ((i + 1) >>> 1) - 1;
 const left = i => (i << 1) + 1;
 const right = i => (i + 1) << 1;
 
+var sortFachbereich = false;
+var showId = false;
+
 class PriorityQueue {
     // Source: https://stackoverflow.com/questions/42919469/efficient-way-to-implement-priority-queue-in-javascript
     constructor(comparator = (a, b) => a > b) {
@@ -72,6 +75,19 @@ class PriorityQueue {
     }
 }
 
+function setFachbereich(value){sortFachbereich = value; console.log("hallo", sortFachbereich, showId);}
+
+var options = new Promise(resolve =>{
+    let getting = browser.storage.local.get([
+        "showFaculty", "courseId"
+    ]);
+    getting.then(a => {
+        sortFachbereich = a.showFaculty || false;
+        showId = a.courseId || false;
+    }, error => {console.error('Error: ' + error)} );
+    resolve();
+});
+
 function printSemster(semester) {
     let year = "20" + semester.substr(0, 2);
     let nextYear = (parseInt(semester.substr(0, 2))+1).toString();
@@ -101,7 +117,12 @@ function main() {
     let courseList = courseDiv.querySelectorAll("#" + courseId + " > ul > li");
 
     let courses = new PriorityQueue((a, b) => {
-        if (a[1] == b[1]) {
+        if (sortFachbereich && a[1] == b[1]) {
+            if ( a[3] == b[3]){
+                return a[2] <= b[2];
+            }
+            return a[3] <= b[3]
+        } else if (a[1] == b[1]){
             return a[2] <= b[2];
         }
         return a[1] >= b[1];
@@ -110,13 +131,28 @@ function main() {
     for (i = 0; i < courseList.length; i++) {
         let courseText = courseList[i].getElementsByTagName('a')[0].innerText;
         let id = courseText.substring(0, courseText.indexOf(':'));
-        let kursName = courseText.substring(courseText.indexOf(':') + 2, courseText.length);
+        let kursName = courseText.substring(courseText.indexOf(':')+1, courseText.length).trim();
         courseList[i].getElementsByTagName('a')[0].innerText = kursName;
-        //courseList[i].innerHTML = courseList[i].innerHTML.replace('<div class="courseInformation">', '<div class="courseInformation"> <span class="courseRole">ID: </span><span>' + id + '</span>');
+        if( kursName.includes(')') ) {
+            kursName = kursName.substring(kursName.indexOf(')')+1,kursName.length).trim();
+        }
+        let fachbereich = id.substring(0, id.indexOf('_'));
+        if(showId){
+            let idDiv = document.createElement('div');
+            idDiv.style = ("text-indent: -16px; margin: 4px 0; padding: 0 0 0 16px;");
+            let spanTitle = document.createElement('span');
+            spanTitle.style="color: #777"; spanTitle.innerText = "ID: ";
+            let spanText = document.createElement('span');
+            spanText.style = "color: #000";
+            spanText.innerText = id + ";";
+            idDiv.appendChild(spanTitle).appendChild(spanText);
+            courseList[i].appendChild(idDiv);
+        }
         let x = [
             courseList[i],
             id.substring(id.length - 3, id.length), // Semster
-            kursName // Name
+            kursName, // Name
+            fachbereich
         ];
         if (!semsterpattern.test(x[1])) {
             x[1] = '00A';
@@ -125,6 +161,7 @@ function main() {
     }
 
     let semester = "Sonstiges"
+    let fachbereich = "";
     let newCoursesDiv = document.createElement("ul");
     newCoursesDiv.className = coursDivClass;
 
@@ -135,15 +172,25 @@ function main() {
             let h2 = document.createElement("h2");
             h2.style = "margin: 30px 0 10px 0";
             h2.innerText = printSemster(semester);
+            fachbereich = "";
             newCoursesDiv.appendChild(h2);
+        }
+        if(!(fachbereich === x[3]) && sortFachbereich){
+            fachbereich = x[3];
+            let h3 = document.createElement("h3");
+            h3.innerText = fachbereich;
+            newCoursesDiv.appendChild(h3);
         }
         newCoursesDiv.appendChild(x[0]);
     }
     courseDiv.parentNode.replaceChild(newCoursesDiv, courseDiv);
+
 }
 
 /*** run script ***/
-waitForElement(courseId, function() {
+waitForElement(courseId, () => {
     //Source: https://stackoverflow.com/questions/16791479/how-to-wait-for-div-to-load-before-calling-another-function
-    main();
+    options.then(() => {
+        main();
+    });
 });
