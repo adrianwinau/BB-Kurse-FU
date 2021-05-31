@@ -6,5 +6,7 @@
 
     #settingsform {
         min-height: 250px;
+        max-width: 20em;
+        padding: 5px 5px 5px 5px;
     }
 }
