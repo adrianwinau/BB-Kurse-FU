@@ -2,7 +2,7 @@
 
     "manifest_version": 2,
     "name": "BB Kurse FU",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "author": "adno",
   
     "description": "Sortiert FU Blackboard Kurse automatisch nach den Semstern. Für lms.fu-berlin.de ",
@@ -30,6 +30,14 @@
       "gecko": {
         "id": "{36ebd9e8-4fd5-49d8-84de-a99fae27c40a}"
       }
+    },
+
+    "page_action":{
+      "browser_style": true,
+      "show_matches": ["*://lms.fu-berlin.de/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_2_1*"],
+      "default_icon": "icons/addon-icon.png",
+      "default_title": "BB Kurse FU",
+      "default_popup": "options.html"
     }
 
   }
