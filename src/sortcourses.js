@@ -188,7 +188,5 @@ function main() {
 /*** run script ***/
 waitForElement(courseId, () => {
     //Source: https://stackoverflow.com/questions/16791479/how-to-wait-for-div-to-load-before-calling-another-function
-    options.then(() => {
-        main();
-    });
+    options.then(main());
 });
