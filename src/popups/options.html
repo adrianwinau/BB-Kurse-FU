@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="options.css">
+    <title>BB Kurse FU - Einstellungen</title>
+  </head>
+
+  <body>
+    <div id="settingsform">
+      <!-- <h2>Einstellungen</h3> -->
+      <h3>Kurse sortieren</h3>
+      <ul>
+        <li><input type="checkbox" id="sortCourses">Kursliste sortieren.
+          <ul>
+            <li><input type="checkbox" id="showFaculty">Nach Fachbereichen sortieren.</li>
+            <li><input type="checkbox" id="showCourseId">Kurs-ID anzeigen.
+              <ul>
+                <li><input type="checkbox" id="showVvLink">Link zum Vorlesungsverzeichnis (VV) anzeigen.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <h3>Download Button</h3>
+      <ul>
+        <li><input type="checkbox" id="showDownloadBtn">Download-Button anzeigen.</li>
+      </ul>
+      <br>
+      <p><em>Nach einer Änderung muss der BB-Tab neu geladen werden, damit diese angewendet werden.</em></p>
+    </div>
+    <script src="options.js"></script>
+  </body>
+</html>
