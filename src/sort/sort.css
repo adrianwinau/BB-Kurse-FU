@@ -1,0 +1,36 @@
+.bb-kurse-fbname {
+    font-weight: bold !important; 
+    width: 100%; 
+    text-align: center;  
+    line-height: 0.01em; 
+    margin: 10px 0 15px !important;
+}
+
+.bb-kurse-semester {
+    margin: 30px 0 10px 0 !important;
+}
+
+.bb-kurse-iddiv{
+    text-indent: -16px; 
+    margin: 4px 0; 
+    padding: 0 0 0 16px;
+}
+
+.bb-kurse-idTitle{
+    color: #777;
+}
+
+.bb-kurse-idText{
+    color: #000;
+}
+
+.bb-kurse-vvlink{
+    font-style: italic;
+}
+
+.bb-kurse-vvlink::after{
+    content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2%" height="2%" viewBox="0 0 1000 1000"><g><path fill="%2306c" d="M945.5,45.4l-280.3-0.4c-24.2-0.1-29.9,13.7-12.9,30.8l104.4,105.1L417.7,520c-27.3,27.3-27.3,71.7,0,99c27.3,27.3,71.7,27.3,99,0l338.8-338.8l103.8,104.4c17,17.1,30.8,11.5,30.8-12.7l-0.6-281.4C989.3,66.3,969.7,45.6,945.5,45.4z M797.6,534.9c-28.6,0-51.9,22.9-52.5,51.4h0v193.6c0,38.7-31.4,70-70,70H185c-38.7,0-70-31.4-70-70V289.9c0-38.7,31.4-70,70-70h334.7v-0.1c27.5-1.7,49.2-24.5,49.2-52.4s-21.8-50.7-49.2-52.4v-0.1H150c-77.3,0-140,62.7-140,140v560c0,77.3,62.7,140,140,140h560c77.3,0,140-62.7,140-140V586.3h0C849.5,557.8,826.2,534.9,797.6,534.9z"/></g></svg>');
+    display: inline-block;
+    width: 10px;
+    height: auto;
+}

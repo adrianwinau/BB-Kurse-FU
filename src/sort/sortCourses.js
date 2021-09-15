@@ -1,21 +1,22 @@
-const courseId = "_183_1termCourses_noterm";
-const coursDivClass = "portletList-img courseListing coursefakeclass ";
-const semsterpattern = /[0-9][0-9][SW]/;
-
-
-const top = 0;
-const parent = i => ((i + 1) >>> 1) - 1;
-const left = i => (i << 1) + 1;
-const right = i => (i + 1) << 1;
-
-var sortFachbereich = false;
-var showId = false;
+const COURSEID = "_183_1termCourses_noterm";
+const COURSDIVCLASS = "portletList-img courseListing coursefakeclass ";
+const SEMSTERPATTERN = /[0-9][0-9][SW]/;
 
 class PriorityQueue {
     // Source: https://stackoverflow.com/questions/42919469/efficient-way-to-implement-priority-queue-in-javascript
     constructor(comparator = (a, b) => a > b) {
         this._heap = [];
         this._comparator = comparator;
+        this.TOP = 0;
+    }
+    parent(i){
+        return ((i + 1) >>> 1) - 1;
+    }
+    left(i){
+        return (i << 1) + 1;
+    }
+    right(i) {
+        return (i + 1) << 1;
     }
     size() {
         return this._heap.length;
@@ -24,7 +25,7 @@ class PriorityQueue {
         return this.size() == 0;
     }
     peek() {
-        return this._heap[top];
+        return this._heap[this.TOP];
     }
     push(...values) {
         values.forEach(value => {
@@ -36,8 +37,8 @@ class PriorityQueue {
     pop() {
         const poppedValue = this.peek();
         const bottom = this.size() - 1;
-        if (bottom > top) {
-            this._swap(top, bottom);
+        if (bottom > this.TOP) {
+            this._swap(this.TOP, bottom);
         }
         this._heap.pop();
         this._siftDown();
@@ -45,7 +46,7 @@ class PriorityQueue {
     }
     replace(value) {
         const replacedValue = this.peek();
-        this._heap[top] = value;
+        this._heap[this.TOP] = value;
         this._siftDown();
         return replacedValue;
     }
@@ -57,34 +58,23 @@ class PriorityQueue {
     }
     _siftUp() {
         let node = this.size() - 1;
-        while (node > top && this._greater(node, parent(node))) {
-            this._swap(node, parent(node));
-            node = parent(node);
+        while (node > this.TOP && this._greater(node, this.parent(node))) {
+            this._swap(node, this.parent(node));
+            node = this.parent(node);
         }
     }
     _siftDown() {
-        let node = top;
+        let node = this.TOP;
         while (
-            (left(node) < this.size() && this._greater(left(node), node)) ||
-            (right(node) < this.size() && this._greater(right(node), node))
+            (this.left(node) < this.size() && this._greater(this.left(node), node)) ||
+            (this.right(node) < this.size() && this._greater(this.right(node), node))
         ) {
-            let maxChild = (right(node) < this.size() && this._greater(right(node), left(node))) ? right(node) : left(node);
+            let maxChild = (this.right(node) < this.size() && this._greater(this.right(node), this.left(node))) ? this.right(node) : this.left(node);
             this._swap(node, maxChild);
             node = maxChild;
         }
     }
 }
-
-var options = new Promise(resolve =>{
-    let getting = browser.storage.local.get([
-        "showFaculty", "courseId"
-    ]);
-    getting.then(a => {
-        sortFachbereich = a.showFaculty || false;
-        showId = a.courseId || false;
-    }, error => {console.error('Error: ' + error)} );
-    resolve();
-});
 
 function printSemster(semester) {
     let year = "20" + semester.substr(0, 2);
@@ -97,22 +87,20 @@ function printSemster(semester) {
     return "Sonstige Kurse";
 }
 
-let countStart = 0;
-function waitForElement(elementId, callBack) {
-  if (++countStart > 25){ return; }
-    window.setTimeout(function() {
-        var element = document.getElementById(elementId);
-        if (element) {
-            callBack(elementId, element);
-        } else {
-            waitForElement(elementId, callBack);
-        }
-    }, 200)
+function waitForElement(elementId, callBack, counter) {
+    //Source: https://stackoverflow.com/questions/16791479/how-to-wait-for-div-to-load-before-calling-another-function
+    if (++counter > 25) return;
+    window.setTimeout(() => {
+        if (document.getElementById(elementId))
+            callBack();
+        else
+            waitForElement(elementId, callBack, counter);
+    }, 200);
 }
 
 function main() {
-    let courseDiv = document.getElementById(courseId).getElementsByTagName('ul')[0];
-    let courseList = courseDiv.querySelectorAll("#" + courseId + " > ul > li");
+    let courseDiv = document.getElementById(COURSEID).getElementsByTagName('ul')[0];
+    let courseList = courseDiv.querySelectorAll("#" + COURSEID + " > ul > li");
 
     let courses = new PriorityQueue((a, b) => {
         if (sortFachbereich && a[1] == b[1]) {
@@ -137,13 +125,22 @@ function main() {
         let fachbereich = id.substring(0, id.indexOf('_'));
         if(showId){
             let idDiv = document.createElement('div');
-            idDiv.style = ("text-indent: -16px; margin: 4px 0; padding: 0 0 0 16px;");
+            id.className = "bb-kurse-iddiv";
             let spanTitle = document.createElement('span');
-            spanTitle.style="color: #777"; spanTitle.innerText = "ID: ";
+            spanTitle.className = "bb-kurse-idTitle"; 
+            spanTitle.innerText = "ID: ";
             let spanText = document.createElement('span');
-            spanText.style = "color: #000";
-            spanText.innerText = id + ";";
+            spanText.className = "bb-kurse-idText";
+            spanText.innerText = id + ";  ";
             idDiv.appendChild(spanTitle).appendChild(spanText);
+            if(showVvLink){
+                let vvLink = document.createElement("a");
+                vvLink.href = "https://www.fu-berlin.de/vv/de/search?utf8=✓&query=" + id.match(/[0-9]+/);
+                vvLink.title = "Link zum VV (Vorlesungsverzeichnis)";
+                vvLink.target = "_blank";
+                vvLink.className = "bb-kurse-vvlink";
+                idDiv.appendChild(vvLink);
+            }
             courseList[i].appendChild(idDiv);
         }
         let x = [
@@ -152,7 +149,7 @@ function main() {
             kursName, // Name
             fachbereich
         ];
-        if (!semsterpattern.test(x[1])) {
+        if (!SEMSTERPATTERN.test(x[1])) {
             x[1] = '00A';
         }
         courses.push(x);
@@ -161,14 +158,14 @@ function main() {
     let semester = "Sonstiges"
     let fachbereich = "";
     let newCoursesDiv = document.createElement("ul");
-    newCoursesDiv.className = coursDivClass;
+    newCoursesDiv.className = COURSDIVCLASS;
 
     while (!courses.isEmpty()) {
         let x = courses.pop();
         if (!(semester === x[1])) {
             semester = x[1];
             let h2 = document.createElement("h2");
-            h2.style = "margin: 30px 0 10px 0";
+            h2.className = "bb-kurse-semester";
             h2.innerText = printSemster(semester);
             fachbereich = "";
             newCoursesDiv.appendChild(h2);
@@ -177,16 +174,32 @@ function main() {
             fachbereich = x[3];
             let h3 = document.createElement("h3");
             h3.innerText = fachbereich;
+            h3.className = "bb-kurse-fbname";
             newCoursesDiv.appendChild(h3);
         }
         newCoursesDiv.appendChild(x[0]);
     }
     courseDiv.parentNode.replaceChild(newCoursesDiv, courseDiv);
-
 }
 
-/*** run script ***/
-waitForElement(courseId, () => {
-    //Source: https://stackoverflow.com/questions/16791479/how-to-wait-for-div-to-load-before-calling-another-function
-    options.then(main());
-});
+let sortFachbereich = showId = sortCourses = showVvLink = false;
+
+if(!navigator.userAgent.toLowerCase().includes("firefox")) browser = chrome;
+
+loaderCss = document.createElement("link");
+loaderCss.rel = "stylesheet"; loaderCss.type = "text/css";
+loaderCss.href = browser.runtime.getURL("sort/sort.css");
+document.querySelector("head").appendChild(loaderCss);
+
+// wait till COURSEID 
+waitForElement(COURSEID, () => {
+    browser.storage.sync.get([
+        "sortCourses", "showFaculty", "showCourseId", "showVvLink"
+    ], a => {
+        sortCourses = a.sortCourses;
+        sortFachbereich = a.showFaculty;
+        showId = a.showCourseId;
+        showVvLink = a.showVvLink;
+        if(sortCourses) main();
+    });
+}, 0);

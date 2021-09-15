@@ -1,0 +1,31 @@
+@media (prefers-color-scheme: dark){
+    body{
+        color: #b1b1b3;
+        background: rgb(35, 34, 43);
+    }
+}
+
+#settingsform {
+    min-height: 250px;
+    width: 300px;
+    padding: 5px 10px 5px 10px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0.5em 0 1em 0;
+    padding: 0 0 0 1em;
+}
+
+li {
+    margin: 0 0 0.5em 0;
+}
+
+input {
+    margin-right: 0.5em;
+}
+
+h3{
+    border-bottom: solid currentColor 1px;
+    padding-bottom: 5px;
+}

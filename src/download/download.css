@@ -1,0 +1,62 @@
+.loader {
+    float: right;
+    margin-right: 0.5em;
+    border: 5px solid #ddd; /* Light grey */
+    border-top: 5px solid #6b9e1e; /*#3498db; /* Blue */
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    animation: spin 2s linear infinite;
+}
+
+.checkmark {
+    /*display:inline-block;*/
+    float: right;
+    margin-right: 0.5em;
+    width: 22px;
+    height:22px;
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.checkmark_circle {
+    position: absolute;
+    width:22px;
+    height:22px;
+    background-color: #6b9e1e;
+    border-radius:11px;
+    left:0;
+    top:0;
+}
+
+.checkmark_stem {
+    position: absolute;
+    width:3px;
+    height:9px;
+    background-color:#fff;
+    left:11px;
+    top:6px;
+}
+
+.checkmark_kick {
+    position: absolute;
+    width:3px;
+    height:3px;
+    background-color:#fff;
+    left:8px;
+    top:12px;
+}
+
+#downloadAll {
+    float: right;
+}
+
+#pageTitleBar {
+    float: left !important;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
