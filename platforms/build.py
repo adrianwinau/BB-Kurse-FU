@@ -1,8 +1,8 @@
 import zipfile as zf
-import os
+import os, shutil
 
 PARENT_PATH = os.path.dirname(__file__)
-HOME_PATH = os.getcwd()
+HOME_PATH = os.path.dirname(PARENT_PATH)
 SRC_PATH = os.path.join(HOME_PATH, "src")
 EXCLUDE = set(["build"])
 
@@ -27,8 +27,10 @@ def build(path, file_extension):
         for (file, arch_file) in list_of_files:
             new_zip.write(file, arch_file)
     
+    BUILD_PATH = path + "\\build"
+    if os.path.isdir(BUILD_PATH): shutil.rmtree(BUILD_PATH)
     with zf.ZipFile(new_file_path, "r", zf.ZIP_DEFLATED) as zip:
-        zip.extractall(path + "\\build")
+        zip.extractall(BUILD_PATH)
 
 if __name__ == "__main__":
     for dir in os.listdir(PARENT_PATH):
