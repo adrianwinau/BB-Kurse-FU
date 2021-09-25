@@ -155,7 +155,7 @@ browser.storage.sync.get([
         try{ console.log(m.greeting); }
         catch (ignore) {} 
         if(m.error)
-            console.error(m.error);
+            console.log(m.error);
     });
 
     let = loaderCss = document.createElement("link");

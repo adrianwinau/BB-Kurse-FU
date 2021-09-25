@@ -39,4 +39,4 @@ if __name__ == "__main__":
             if "firefox" in dir_path:
                 build(dir_path, ".xpi")
             else:
-                build(dir_path, ".crx")
+                build(dir_path, ".zip")

@@ -58,6 +58,7 @@ browser.runtime.onConnect.addListener(p => {
 });
 
 browser.downloads.onChanged.addListener( delta => {
+    if(delta.state == undefined) return;
     switch (delta.state.current) {
         case "complete":
             var id = delta.id;

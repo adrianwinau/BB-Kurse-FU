@@ -8,7 +8,9 @@
     "homepage_url": "https://github.com/ITadno/BB-Kurse-FU",
 
     "icons": {
-      "32": "icons/addon-icon.png"
+      "32": "icons/32x32.png",
+      "96": "icons/96x96.png",
+      "128": "icons/128x128.png"
     },
 
     "content_scripts": [
@@ -50,7 +52,7 @@
         "*://lms.fu-berlin.de/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_2_1*",
         "*://lms.fu-berlin.de/webapps/blackboard/content/listContent.jsp*"
       ],
-      "default_icon": "icons/addon-icon.png",
+      "default_icon": "icons/96x96.png",
       "default_title": "BB Kurse FU",
       "default_popup": "popups/options.html"
     }
