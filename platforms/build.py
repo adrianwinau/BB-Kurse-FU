@@ -37,6 +37,6 @@ if __name__ == "__main__":
         dir_path = os.path.join(PARENT_PATH, dir)
         if os.path.isdir(dir_path):
             if "firefox" in dir_path:
-                build(dir_path, ".xpi")
+                build(dir_path, "-firefox.xpi")
             else:
-                build(dir_path, ".zip")
+                build(dir_path, "-chromium.zip")
