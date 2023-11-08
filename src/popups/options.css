@@ -5,6 +5,11 @@
     }
 }
 
+html {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px;
+}
+
 #settingsform {
     min-height: 250px;
     width: 300px;
