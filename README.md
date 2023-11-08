@@ -1,6 +1,6 @@
 # BB Kurse FU
 
-Browser Erweiterung, um das Blackboard der FU Berlin (lms.fu-berlin.de) aufzupeppen und übersichtlicher zu gestalten.
+Browser Erweiterung, um das Blackboard der FU Berlin (fu-berlin.blackboard.com) aufzupeppen und übersichtlicher zu gestalten.
 
 ### Verfügbar für
 
@@ -30,4 +30,4 @@ Alle Funktionen sind ein-/ausschaltbar in den Erweiterungseinstellungen (Browser
 
 ## Wichtig
 
-Damit das Sortieren funktioniert muss die Kurs-ID (Course ID) angezeigt werden. Das kann [hier](https://lms.fu-berlin.de/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_2_1&forwardUrl=edit_module%2F_183_1%2Fbbcourseorg%3Fcmd%3Dedit&recallUrl=) eingestellt werden
+Damit das Sortieren funktioniert muss die Kurs-ID (Course ID) angezeigt werden. Das kann [hier](https://fu-berlin.blackboard.com/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_2_1&forwardUrl=edit_module%2F_183_1%2Fbbcourseorg%3Fcmd%3Dedit&recallUrl=) eingestellt werden
