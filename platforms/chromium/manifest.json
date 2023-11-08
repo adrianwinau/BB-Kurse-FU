@@ -1,10 +1,10 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "BB Kurse FU",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "author": "adno",
   
-    "description": "Sortiert FU Blackboard Kurse automatisch nach den Semstern. Für fu-berlin.blackboard.com ",
+    "description": "Sortiert FU Blackboard Kurse automatisch nach den Semestern. Für fu-berlin.blackboard.com ",
     "homepage_url": "https://github.com/ITadno/BB-Kurse-FU",
 
     "icons": {
@@ -16,7 +16,8 @@
     "content_scripts": [
       {
         "matches": ["*://fu-berlin.blackboard.com/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_2_1*"],
-        "js": ["sort/sortCourses.js"]
+        "js": ["sort/sortCourses.js"],
+        "css": ["sort/sort.css"]
       },
       {
         "matches": ["*://fu-berlin.blackboard.com/webapps/blackboard/content/listContent.jsp*"],
@@ -24,16 +25,9 @@
       }
     ],
 
-    "background": {
-      "scripts": [
-        "background/download.js",
-        "background/chromePageAction.js"
-      ]
-    },
 
     "options_ui": {
-      "page": "popups/options.html",
-      "browser_style": true
+      "page": "popups/options.html"
     },
 
     "permissions": [
@@ -42,12 +36,7 @@
       "declarativeContent"
     ],
 
-    "web_accessible_resources": [
-      "*.css", "*.svg"
-    ],
-
-    "page_action":{
-      "chrome_style": true,
+    "action":{
       "show_matches": [
         "*://fu-berlin.blackboard.com/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_2_1*",
         "*://fu-berlin.blackboard.com/webapps/blackboard/content/listContent.jsp*"

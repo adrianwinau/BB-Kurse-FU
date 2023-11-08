@@ -18,23 +18,24 @@ function changeCheckbox(id) {
 if (!navigator.userAgent.toLowerCase().includes("firefox")) browser = chrome;
 
 
-document.addEventListener("DOMContentLoaded", () => {
-    browser.storage.sync.get([
-        "sortCourses",
-        "showFaculty",
-        "showCourseId",
-        "showVvLink",
-        // "showDownloadBtn",
-    ], a => {
-        document.querySelector("#sortCourses").checked = a.sortCourses || false;
-        document.querySelector("#showFaculty").checked = a.showFaculty || false;
-        document.querySelector("#showCourseId").checked = a.showCourseId || false;
-        document.querySelector("#showVvLink").checked = a.showVvLink || false;
-        // document.querySelector("#showDownloadBtn").checked = a.showDownloadBtn || false;
-        // document.querySelector("#showDownloadBtn").checked = false;
+// document.addEventListener("DOMContentLoaded", () => {
+   
+// });
+browser.storage.sync.get([
+    "sortCourses",
+    "showFaculty",
+    "showCourseId",
+    "showVvLink",
+    // "showDownloadBtn",
+]).then( a => {
+    document.querySelector("#sortCourses").checked = a.sortCourses || false;
+    document.querySelector("#showFaculty").checked = a.showFaculty || false;
+    document.querySelector("#showCourseId").checked = a.showCourseId || false;
+    document.querySelector("#showVvLink").checked = a.showVvLink || false;
+    // document.querySelector("#showDownloadBtn").checked = a.showDownloadBtn || false;
+    // document.querySelector("#showDownloadBtn").checked = false;
 
-        updateList();
-    });
+    updateList();
 });
 
 document.querySelector("#showFaculty").addEventListener("change", () => changeCheckbox("showFaculty"));

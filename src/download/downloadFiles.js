@@ -138,7 +138,7 @@ async function startDownloading(){
 }
 
 //TODO: this file is currently disabled
-return;
+/*
 
 let isDownloading = false;
 let myPort, runningDiv, finallySymbolDiv, downloadBtn;
@@ -189,3 +189,4 @@ browser.storage.sync.get([
 
     document.getElementById("downloadAll").addEventListener("click", startDownloading);
 });
+*/

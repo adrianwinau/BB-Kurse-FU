@@ -95,7 +95,7 @@ function waitForElement(elementId, callBack, counter) {
             callBack();
         else
             waitForElement(elementId, callBack, counter);
-    }, 200);
+    }, 50);
 }
 
 function main() {
@@ -186,16 +186,20 @@ let sortFachbereich = showId = sortCourses = showVvLink = false;
 
 if(!navigator.userAgent.toLowerCase().includes("firefox")) browser = chrome;
 
-loaderCss = document.createElement("link");
-loaderCss.rel = "stylesheet"; loaderCss.type = "text/css";
-loaderCss.href = browser.runtime.getURL("sort/sort.css");
-document.querySelector("head").appendChild(loaderCss);
+// loaderCss = document.createElement("link");
+// loaderCss.rel = "stylesheet"; loaderCss.type = "text/css";
+// loaderCss.href = browser.runtime.getURL("sort/sort.css");
+// document.querySelector("head").appendChild(loaderCss);
 
 // wait till COURSEID 
 waitForElement(COURSEID, () => {
     browser.storage.sync.get([
-        "sortCourses", "showFaculty", "showCourseId", "showVvLink"
-    ], a => {
+        "sortCourses",
+        "showFaculty",
+        "showCourseId",
+        "showVvLink",
+    ]).then( a => {
+        // console.log(a);
         sortCourses = a.sortCourses;
         sortFachbereich = a.showFaculty;
         showId = a.showCourseId;
