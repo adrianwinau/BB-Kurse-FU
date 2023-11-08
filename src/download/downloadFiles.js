@@ -137,6 +137,9 @@ async function startDownloading(){
     return;
 }
 
+//TODO: this file is currently disabled
+return;
+
 let isDownloading = false;
 let myPort, runningDiv, finallySymbolDiv, downloadBtn;
 
