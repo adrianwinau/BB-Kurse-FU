@@ -2,7 +2,7 @@
 
     "manifest_version": 2,
     "name": "BB Kurse FU",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "author": "adno",
   
     "description": "Sortiert FU Blackboard Kurse automatisch nach den Semestern. Für fu-berlin.blackboard.com ",
