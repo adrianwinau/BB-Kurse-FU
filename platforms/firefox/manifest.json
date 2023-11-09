@@ -5,7 +5,7 @@
     "version": "1.1.0",
     "author": "adno",
   
-    "description": "Sortiert FU Blackboard Kurse automatisch nach den Semstern. Für fu-berlin.blackboard.com ",
+    "description": "Sortiert FU Blackboard Kurse automatisch nach den Semestern. Für fu-berlin.blackboard.com ",
     "homepage_url": "https://github.com/ITadno/BB-Kurse-FU",
 
     "icons": {

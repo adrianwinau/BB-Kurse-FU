@@ -1,6 +1,6 @@
 const COURSEID = "_183_1termCourses_noterm";
 const COURSDIVCLASS = "portletList-img courseListing coursefakeclass ";
-const SEMSTERPATTERN = /[0-9][0-9][SW]/;
+const SEMESTERPATTERN = /[0-9][0-9][SW]/;
 
 class PriorityQueue {
     // Source: https://stackoverflow.com/questions/42919469/efficient-way-to-implement-priority-queue-in-javascript
@@ -76,13 +76,13 @@ class PriorityQueue {
     }
 }
 
-function printSemster(semester) {
+function printSemester(semester) {
     let year = "20" + semester.substr(0, 2);
     let nextYear = (parseInt(semester.substr(0, 2))+1).toString();
     if (semester.charAt(2) == 'S') {
-        return "Sommersemster " + year;
+        return "Sommersemester " + year;
     } else if (semester.charAt(2) == 'W') {
-        return "Wintersemster " + year + "/" + nextYear;
+        return "Wintersemester " + year + "/" + nextYear;
     }
     return "Sonstige Kurse";
 }
@@ -145,11 +145,11 @@ function main() {
         }
         let x = [
             courseList[i],
-            id.substring(id.length - 3, id.length), // Semster
+            id.substring(id.length - 3, id.length), // Semester
             kursName, // Name
             fachbereich
         ];
-        if (!SEMSTERPATTERN.test(x[1])) {
+        if (!SEMESTERPATTERN.test(x[1])) {
             x[1] = '00A';
         }
         courses.push(x);
@@ -166,7 +166,7 @@ function main() {
             semester = x[1];
             let h2 = document.createElement("h2");
             h2.className = "bb-kurse-semester";
-            h2.innerText = printSemster(semester);
+            h2.innerText = printSemester(semester);
             fachbereich = "";
             newCoursesDiv.appendChild(h2);
         }
